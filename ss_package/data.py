@@ -120,3 +120,23 @@ class ProcText:
         self.lemmatize()
         self.df = self.df.drop(columns=self.old_col, inplace=True)
         return self.df
+
+
+class FeatEng:
+
+    def __init__(self, df=df, col='clean_review', new_col='review_richness'):
+        self.df = df
+        self.col = col
+        self.new_col = new_col
+
+    def vocab_richness(self, text):
+        tokens = word_tokenize(text)
+        total_length = len(tokens)
+        unique_words = set(tokens)
+        unique_word_length = len(unique_words)
+        return unique_word_length / total_length
+
+    def richness_col(self):
+        self.df = self.df[self.df[col] != '']
+        self.df[self.new_col] = self.df[self.col].apply(self.vocab_richness)
+        return self.df
