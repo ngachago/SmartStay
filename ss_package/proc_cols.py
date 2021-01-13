@@ -29,12 +29,12 @@ def time_data(df):
     return df_2
 
 def review_map(rating):
-    if rating > 3:
+    if rating == 5:
         return 'great'
-    if rating == 3:
-        return 'ok'
-    if rating < 3:
-        return 'bad'
+    if rating >=4 and rating < 5:
+        return 'good'
+    if rating < 4:
+        return 'not great'
 
 def short_url(url):
     parsed = urlparse(url)
